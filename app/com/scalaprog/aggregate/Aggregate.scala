@@ -1,0 +1,5 @@
+package aggregate;
+
+class Aggregate {
+
+}
