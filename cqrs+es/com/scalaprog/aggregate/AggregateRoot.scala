@@ -8,15 +8,15 @@ import com.scalaprog.engine.Server
 
 abstract class AggregateRoot(id: UUID) {
 
-  // initialize the aggregate from the eventstore
-  loadFromHistory()
-
-	protected def applyEvent(cmd: AbstractEvent , storeEvent: Boolean)
+	def applyEvent(cmd: AbstractEvent , storeEvent: Boolean)
 	
-	def loadFromHistory() {
-    val events = Server.eventStore.getEvents(id)
+	def loadFromHistory() = {
+    val events = Server.eventStore.getEvents(id).reverse
+    println("-----------------------------")
 		for ( abstractEvent <- events) {
+      println("Applying event "+abstractEvent)
 			applyEvent(abstractEvent, false)
 		}
+    this
 	}
 }

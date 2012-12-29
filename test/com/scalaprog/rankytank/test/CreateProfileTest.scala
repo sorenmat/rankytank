@@ -1,3 +1,5 @@
+package com.scalaprog.rankytank.test
+
 import aggregates.ProfileAggregate
 import com.scalaprog.engine.Server
 import commands.CreateUserProfile

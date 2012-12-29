@@ -18,7 +18,7 @@ object ProjectionEngine {
 
 	def publishEvent(event: AbstractEvent) {
 		for (listener <- listeners) {
-			listener.publish(event);
+			listener.eventPublished(event);
 		}
 	}
 }

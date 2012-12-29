@@ -4,7 +4,6 @@ import aggregate.AggregateRoot
 import com.scalaprog.events.AbstractEvent
 import commands.CreateUserProfile
 import events.ProfileCreated
-import eventstore.EventStore
 import java.util.UUID
 import com.scalaprog.engine.Server
 
@@ -29,7 +28,7 @@ class ProfileAggregate(val id: UUID) extends AggregateRoot(id) {
 
       }
     }
-    if(storeEvent)
+    if (storeEvent)
       Server.eventStore.save(cmd, id)
 
   }

@@ -11,10 +11,17 @@ class LeaugeHandler extends CommandHandler {
   def handle(cmd: AbstractCommand) {
     cmd match {
       case c: CreateLeague => {
-        new LeagueAggregate(c.id).createLeague(c)
+        val agg = getAggreateById(c.id, classOf[LeagueAggregate])
+        agg.createLeague(c)
       }
-      case c: JoinLeague => new LeagueAggregate(c.leagueId).addUserToLeague(c)
-      case c: RegisterMatchScore => new LeagueAggregate(c.leagueId).registerMatch(c)
+      case c: JoinLeague => {
+        val agg = getAggreateById(c.leagueId, classOf[LeagueAggregate])
+        agg.addUserToLeague(c)
+      }
+      case c: RegisterMatchScore => getAggreateById(c.leagueId, classOf[LeagueAggregate]).registerMatch(c)
+      case _ =>
     }
   }
+
+
 }

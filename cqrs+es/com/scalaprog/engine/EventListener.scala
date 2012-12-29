@@ -4,5 +4,5 @@ import com.scalaprog.events.AbstractEvent;
 
 abstract class EventListener {
 
-	def publish(event: AbstractEvent )
+	def eventPublished(event: AbstractEvent )
 }
