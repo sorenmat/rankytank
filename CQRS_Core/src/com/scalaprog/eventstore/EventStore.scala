@@ -1,14 +1,8 @@
-package eventstore
+package com.scalaprog.eventstore
 
 
-import play.libs.Json
-import projections.engine.ProjectionEngine
-
-import com.mongodb.BasicDBObject
-import com.mongodb.Mongo
 import com.scalaprog.events.AbstractEvent
-import java.lang.{Exception, String}
-import com.google.gson.Gson
+import java.lang.String
 import java.util.UUID
 
 

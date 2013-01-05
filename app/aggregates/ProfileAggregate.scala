@@ -1,11 +1,11 @@
 package aggregates
 
-import aggregate.AggregateRoot
 import com.scalaprog.events.AbstractEvent
 import commands.CreateUserProfile
 import events.ProfileCreated
 import java.util.UUID
 import com.scalaprog.engine.Server
+import com.scalaprog.aggregate.AggregateRoot
 
 class ProfileAggregate(val id: UUID) extends AggregateRoot(id) {
 

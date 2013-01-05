@@ -1,17 +1,16 @@
 package com.scalaprog.rankytank.test.projection
 
-import commandhandlers.{ProfileHandler, LeaugeHandler}
+import commandhandlers.{ProfileHandler, LeagueHandler}
 import commands.{RegisterMatchScore, JoinLeague, CreateLeague, CreateUserProfile}
 import java.util.UUID
 import org.scalatest.FunSuite
-import com.scalaprog.engine.Server
-import projections.engine.ProjectionEngine
+import com.scalaprog.engine.{ProjectionEngine, Server}
 import projection.MatchInfoProjection
 
 class MatchInfoProjectionTest extends FunSuite {
 
   test("command test") {
-    Server.register(new LeaugeHandler())
+    Server.register(new LeagueHandler())
     Server.register(new ProfileHandler())
     val matchProjection: MatchInfoProjection = new MatchInfoProjection()
     ProjectionEngine.registerListener(matchProjection)

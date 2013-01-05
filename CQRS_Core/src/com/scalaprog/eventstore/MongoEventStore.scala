@@ -1,17 +1,16 @@
 package com.scalaprog.eventstore
 
-import play.libs.Json
-import projections.engine.ProjectionEngine
 
 import com.mongodb.BasicDBObject
 import com.mongodb.Mongo
 import com.scalaprog.events.AbstractEvent
-import java.lang.{Exception, String}
+import java.lang.Exception
 import com.google.gson.Gson
 import java.util.UUID
+import com.scalaprog.engine.ProjectionEngine
 
 
-object MongoEventStore {
+object MongoEventStore extends EventStore{
 
   val m = new Mongo()
 

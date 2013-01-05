@@ -1,14 +1,14 @@
 package com.scalaprog.engine
 
 import com.scalaprog.command.{AbstractCommand, CommandHandler}
-import com.scalaprog.eventstore.MemoryEventStore
+import com.scalaprog.eventstore.{MongoEventStore, EventStore, MemoryEventStore}
 
 /**
  * User: soren
  */
 object Server {
 
-  var eventStore = MemoryEventStore
+  var eventStore:EventStore = MongoEventStore//MemoryEventStore
 
   var handlers = List[CommandHandler]()
 

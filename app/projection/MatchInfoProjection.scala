@@ -47,7 +47,10 @@ class MatchInfoProjection extends EventListener {
 
   }
 
-  def getScores = {
+  def getScoresAsString = {
     scores.toSeq.sortWith(_._2 > _._2).map(score => names(score._1)+"\t"+score._2)
+  }
+  def getScores = {
+    scores.toSeq.sortWith(_._2 > _._2).map(score => (names(score._1), score._2))
   }
 }

@@ -1,9 +1,7 @@
 package com.scalaprog.rankytank.test
 
-import aggregates.{LeagueAggregate, ProfileAggregate}
-import commandhandlers.{ProfileHandler, LeaugeHandler}
+import commandhandlers.{ProfileHandler, LeagueHandler}
 import commands.{JoinLeague, CreateLeague, CreateUserProfile}
-import eventstore.EventStore
 import java.util.UUID
 import org.scalatest.FunSuite
 import com.scalaprog.engine.Server
@@ -11,7 +9,7 @@ import com.scalaprog.engine.Server
 class JoinLeagueTest extends FunSuite {
 
   test("command test") {
-    Server.register(new LeaugeHandler())
+    Server.register(new LeagueHandler())
     Server.register(new ProfileHandler())
 
     val userId: UUID = UUID.randomUUID()

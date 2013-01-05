@@ -7,7 +7,7 @@ import aggregates.LeagueAggregate
 /**
  * User: soren
  */
-class LeaugeHandler extends CommandHandler {
+class LeagueHandler extends CommandHandler {
   def handle(cmd: AbstractCommand) {
     cmd match {
       case c: CreateLeague => {

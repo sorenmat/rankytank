@@ -1,7 +1,6 @@
-package aggregate;
+package com.scalaprog.aggregate;
 
 import com.scalaprog.events.AbstractEvent
-import eventstore.EventStore
 import java.util.UUID
 import com.scalaprog.engine.Server
 ;

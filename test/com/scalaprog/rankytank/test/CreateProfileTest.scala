@@ -3,7 +3,6 @@ package com.scalaprog.rankytank.test
 import aggregates.ProfileAggregate
 import com.scalaprog.engine.Server
 import commands.CreateUserProfile
-import eventstore.EventStore
 import java.util.UUID
 import org.scalatest.FunSuite
 

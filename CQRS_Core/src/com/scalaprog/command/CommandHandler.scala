@@ -1,8 +1,8 @@
 package com.scalaprog.command
 
-import aggregate.AggregateRoot
 import java.util.UUID
 import com.scalaprog.engine.Server
+import com.scalaprog.aggregate.AggregateRoot
 
 /**
  * User: soren

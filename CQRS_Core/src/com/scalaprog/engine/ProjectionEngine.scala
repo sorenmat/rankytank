@@ -1,4 +1,4 @@
-package projections.engine;
+package com.scalaprog.engine;
 
 import com.scalaprog.events.AbstractEvent
 import com.scalaprog.projections.engine.EventListener

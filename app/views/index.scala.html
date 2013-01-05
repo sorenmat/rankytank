@@ -1,7 +1,113 @@
-@(message: String)
+@(message: String, scores: List[(String, Int)], users: List[(java.util.UUID, String)], userform: Form[models.User])
+@import java.util.UUID
+@import helper._
+@import helpers.MyHelpers._
 
 @main("Welcome to Play 2.0") {
+    <div class="widget">
 
-    @play20.welcome(message)
+        <div class="widget-header">
+            <i class="icon-star"></i>
+            <h3>League ranking</h3>
+        </div> <!-- /widget-header -->
 
+        <div class="widget-content">
+
+        @scores.map { score =>
+            <tr>
+                <td>@score._1</td>
+                <td>@score._2</td>
+            </tr>
+        }
+
+        </div> <!-- /widget-content -->
+
+    </div>
+
+} {
+
+    <div class="widget">
+
+        <div class="widget-header">
+            <i class="icon-star"></i>
+            <h3>Enter match score</h3>
+        </div> <!-- /widget-header -->
+
+        <div class="widget-content">
+            <form class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label" for="test_me_paddington">Team one</label>
+                    <div class="controls">
+
+                        <select placeholder="Email" data-maxselected="2" data-placeholder="Team one" style="width:350px;" multiple class="chzn-select" id="test_me_paddington" name="test_me_form" tabindex="8">
+                            <option value=""></option>
+                            @users.map { userData =>
+                                <option value=@userData._1>@userData._2</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="test_me_paddington2">Team two</label>
+                    <div class="controls">
+                        <select placeholder="Password" data-placeholder="Team two" style="width:350px;" multiple class="chzn-select" id="test_me_paddington2" name="test_me_form" tabindex="8">
+                            <option value=""></option>
+                            @users.map { userData =>
+                                <option value=@userData._1>@userData._2</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" class="btn">Post match</button>
+                    </div>
+                </div>
+            </form>
+
+        </div> <!-- /widget-content -->
+
+    </div>
+
+
+} {
+
+    <div class="widget">
+        <div class="widget-header">
+            <i class="icon-star"></i>
+            <h3>Register profile</h3>
+        </div> <!-- /widget-header -->
+
+        <div class="widget-content">
+        @helper.form(action = routes.Application.registerProfile, 'class -> "form-horizontal") {
+
+            @inputText(
+                userform("profileName"),
+                '_label -> "Name",
+                '_help -> "*",
+                '_error -> userform.globalError
+            )
+
+            @inputText(
+                userform("email"),
+                '_label -> "Email",
+                '_help -> "*",
+                '_error -> userform.globalError
+            )
+
+            @inputPassword(
+                userform("password"),
+                '_label -> "Password",
+                '_help -> "*",
+                '_error -> userform.globalError
+            )
+
+            <div class="control-group">
+                <div class="controls">
+                    <button type="submit" class="btn">Register profile</button>
+                </div>
+            </div>
+        }
+        </div>
+    </div>
 }

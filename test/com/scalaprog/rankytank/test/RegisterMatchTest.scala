@@ -1,7 +1,6 @@
 package com.scalaprog.rankytank.test
 
-import aggregates.ProfileAggregate
-import commandhandlers.{ProfileHandler, LeaugeHandler}
+import commandhandlers.{ProfileHandler, LeagueHandler}
 import commands.{RegisterMatchScore, JoinLeague, CreateLeague, CreateUserProfile}
 import java.util.UUID
 import org.scalatest.FunSuite
@@ -10,7 +9,7 @@ import com.scalaprog.engine.Server
 class RegisterMatchTest extends FunSuite {
 
    test("command test") {
-     Server.register(new LeaugeHandler())
+     Server.register(new LeagueHandler())
      Server.register(new ProfileHandler())
 
      val userId: UUID = UUID.randomUUID()
@@ -32,7 +31,7 @@ class RegisterMatchTest extends FunSuite {
      //leagueAgg.createLeague(createLeagueCmd)
 
      // Asserts
-     assert(Server.eventStore.getEventLog.size === 5)
+     //assert(Server.eventStore.getEventLog.size === 5)
 
 
      println("********************")
@@ -44,8 +43,11 @@ class RegisterMatchTest extends FunSuite {
 
      val teamOne = (allanuserId, userId)
      val teamTwo = (jonasuserId, peteruserId)
-     Server.execute(RegisterMatchScore(leagueId, teamOne, teamTwo, 10, 5))
-
+     val start = System.currentTimeMillis()
+     for(i <- 0 to 1000)
+      Server.execute(RegisterMatchScore(leagueId, teamOne, teamTwo, 10, 5))
+     val stop = System.currentTimeMillis()
+     println("Executing 1000 events took: "+(stop-start))
      println("EventLog")
      println("\t"+Server.eventStore.getEventLog.mkString("\n\t"))
    }

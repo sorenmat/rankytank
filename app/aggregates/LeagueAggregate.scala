@@ -1,11 +1,11 @@
 package aggregates
 
-import aggregate.AggregateRoot
 import com.scalaprog.events.AbstractEvent
 import commands.{RegisterMatchScore, JoinLeague, CreateLeague}
 import events.{MatchScoreRegistered, LeagueJoined, LeagueCreated}
 import java.util.UUID
 import com.scalaprog.engine.Server
+import com.scalaprog.aggregate.AggregateRoot
 
 class LeagueAggregate(val id: UUID) extends AggregateRoot(id) {
 

@@ -1,8 +1,8 @@
 package commandhandlers
 
 import com.scalaprog.command.{AbstractCommand, CommandHandler}
-import commands.CreateUserProfile
-import aggregates.ProfileAggregate
+import commands._
+import aggregates._
 
 /**
  * CommandHandler for handling commands related to User profiles

@@ -1,4 +1,4 @@
-package com.scalaprog.events;
+package com.scalaprog.events
 
 abstract class AbstractEvent {
 
