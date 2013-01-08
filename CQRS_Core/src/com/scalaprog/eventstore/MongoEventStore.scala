@@ -15,11 +15,21 @@ object MongoEventStore extends EventStore{
 
 
   //val mongoURI = new URI(System.getenv("MONGOHQ_URL"));
-  val mongoURI = new MongoURI(System.getenv("MONGOHQ_URL"));
+  val db = {
+    val url = System.getenv("MONGOHQ_URL")
+    if (url == null || url.isEmpty) {
+      val mongoURI = new MongoURI(System.getenv("MONGOHQ_URL"));
+      mongoURI.connectDB()
+    }  else{
+      new Mongo().getDB("eventStore")
+    }
+
+  }
+
 
   val gson = new Gson()
 
-  val db = mongoURI.connectDB()
+  //val db = mongoURI.connectDB()
 
   //val db = m.getDB("eventStore")
   val coll = db.getCollection("events")

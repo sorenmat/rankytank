@@ -10,6 +10,7 @@ object Global extends GlobalSettings {
   override def onStart(app: Application) {
     ProjectionEngine.registerListener(MatchInfoProjection)
     ProjectionEngine.registerListener(ProfileProjection)
+    ProjectionEngine.registerListener(LeagueProjection)
     // prefill projections
     for(e <- Server.eventStore.getEventLog) {
       LeagueProjection.eventPublished(e)
