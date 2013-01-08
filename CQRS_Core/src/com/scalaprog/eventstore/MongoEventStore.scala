@@ -1,27 +1,26 @@
 package com.scalaprog.eventstore
 
 
-import com.mongodb.{MongoURI, MongoOptions, BasicDBObject, Mongo}
+import com.mongodb.{MongoURI, BasicDBObject, Mongo}
 import com.scalaprog.events.AbstractEvent
 import java.lang.Exception
 import com.google.gson.Gson
 import java.util.UUID
 import com.scalaprog.engine.ProjectionEngine
 import com.codahale.jerkson.Json
-import java.net.URI
 
 
-object MongoEventStore extends EventStore{
+object MongoEventStore extends EventStore {
 
 
   //val mongoURI = new URI(System.getenv("MONGOHQ_URL"));
   val db = {
     val url = System.getenv("MONGOHQ_URL")
     if (url == null || url.isEmpty) {
+      new Mongo().getDB("eventStore")
+    } else {
       val mongoURI = new MongoURI(System.getenv("MONGOHQ_URL"));
       mongoURI.connectDB()
-    }  else{
-      new Mongo().getDB("eventStore")
     }
 
   }
