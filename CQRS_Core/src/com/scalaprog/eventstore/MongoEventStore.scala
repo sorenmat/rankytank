@@ -1,22 +1,27 @@
 package com.scalaprog.eventstore
 
 
-import com.mongodb.BasicDBObject
-import com.mongodb.Mongo
+import com.mongodb.{MongoURI, MongoOptions, BasicDBObject, Mongo}
 import com.scalaprog.events.AbstractEvent
 import java.lang.Exception
 import com.google.gson.Gson
 import java.util.UUID
 import com.scalaprog.engine.ProjectionEngine
 import com.codahale.jerkson.Json
+import java.net.URI
 
 
 object MongoEventStore extends EventStore{
 
-  val m = new Mongo()
+
+  //val mongoURI = new URI(System.getenv("MONGOHQ_URL"));
+  val mongoURI = new MongoURI(System.getenv("MONGOHQ_URL"));
+
   val gson = new Gson()
 
-  val db = m.getDB("eventStore")
+  val db = mongoURI.connectDB()
+
+  //val db = m.getDB("eventStore")
   val coll = db.getCollection("events")
 
   def save(event: AbstractEvent, id: UUID) {
@@ -32,7 +37,6 @@ object MongoEventStore extends EventStore{
   def getEvents(aggregateId: UUID): List[AbstractEvent] = {
     var events = List[AbstractEvent]()
     try {
-      val db = m.getDB("eventStore")
       val coll = db.getCollection("events")
 
       val query = new BasicDBObject()
@@ -61,7 +65,6 @@ object MongoEventStore extends EventStore{
   def getEventLog: List[AbstractEvent] = {
     var events = List[AbstractEvent]()
     try {
-      val db = m.getDB("eventStore")
       val coll = db.getCollection("events")
 
       val query = new BasicDBObject()
