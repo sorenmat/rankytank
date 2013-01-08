@@ -21,7 +21,7 @@ class LeagueAggregate(val id: UUID) extends AggregateRoot(id) {
     require(cmd.name != null && cmd.name != "")
     require(cmd.password != null && cmd.password != "")
     require(!created)
-    val event = LeagueCreated(cmd.name, cmd.password)
+    val event = LeagueCreated(cmd.id, cmd.name, cmd.password)
     applyEvent(event, true)
   }
 
@@ -35,6 +35,7 @@ class LeagueAggregate(val id: UUID) extends AggregateRoot(id) {
   }
 
   def registerMatch(cmd: RegisterMatchScore) {
+    require(created)
     require(cmd.leagueId == id)
     require(cmd.teamOneScore == 10 || cmd.teamTwoScore == 10)
     //do a check to see if the players exsists..

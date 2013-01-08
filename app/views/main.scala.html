@@ -8,8 +8,8 @@
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
     <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
     <script src="@routes.Assets.at("javascripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("javascripts/bootstrap.min.js")" type="text/javascript"></script>
     <link rel='stylesheet' media='screen' href='@routes.Assets.at("stylesheets/bootstrap.min.css")'>
-
 
     <script src="assets/javascripts/chosen/chosen.jquery.js" type="text/javascript"></script>
     <link rel='stylesheet' media='screen' href="assets/javascripts/chosen/chosen.css">
@@ -167,9 +167,15 @@
     </style>
 </head>
 <body>
-<br/>
-<br/>
-<br/>
+<div class="container-fluid">
+    <ul class="nav nav-pills">
+        <li class="active">
+            <a href="#">Home</a>
+        </li>
+        <li><a class="open-dialog" rel="sample2-dialog" href="createNewLeague">Create new league</a></li>
+        <li><a href="#">...</a></li>
+    </ul>
+</div>
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span8">

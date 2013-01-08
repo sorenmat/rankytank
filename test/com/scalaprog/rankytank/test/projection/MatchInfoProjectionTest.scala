@@ -12,8 +12,7 @@ class MatchInfoProjectionTest extends FunSuite {
   test("command test") {
     Server.register(new LeagueHandler())
     Server.register(new ProfileHandler())
-    val matchProjection: MatchInfoProjection = new MatchInfoProjection()
-    ProjectionEngine.registerListener(matchProjection)
+    ProjectionEngine.registerListener(MatchInfoProjection)
 
     val userId: UUID = UUID.randomUUID()
     Server.execute(new CreateUserProfile(userId, "Soren", "1234", "soren@test.com"))
@@ -55,8 +54,8 @@ class MatchInfoProjectionTest extends FunSuite {
     println("\t" + Server.eventStore.getEventLog.mkString("\n\t"))
     println("Scores")
     println("---------------")
-    println(matchProjection.scores.mkString("\n"))
+    println(MatchInfoProjection.scores.mkString("\n"))
     println("---------------")
-    println(matchProjection.getScores.mkString("\n"))
+    println(MatchInfoProjection.getScores.mkString("\n"))
   }
 }

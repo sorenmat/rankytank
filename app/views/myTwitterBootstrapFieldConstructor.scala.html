@@ -11,7 +11,7 @@
     <label class="control-label" for="@elements.id">@elements.args.get('_label).getOrElse(elements.label(elements.lang))</label>
         <div class="controls">
 
-            <input value="@elements.field.value " type="@elements.args.get('_type).getOrElse("text")" id="@elements.args.get('_id).getOrElse(elements.id)" name="@elements.args.get('_name).getOrElse(elements.id)" placeholder="@elements.id"/>
+            <input value="@elements.field.value" type="@elements.args.get('_type).getOrElse("text")" id="@elements.args.get('_id).getOrElse(elements.id)" name="@elements.args.get('_name).getOrElse(elements.id)" placeholder="@elements.id"/>
             <span class="help-inline">@elements.infos(elements.lang).mkString(", ")</span>
             @if(elements.hasErrors) {
                 <span class="label label-important">@elements.errors(elements.lang).mkString(", ")</span>

@@ -5,10 +5,12 @@ import commands.{RegisterMatchScore, JoinLeague, CreateLeague, CreateUserProfile
 import java.util.UUID
 import org.scalatest.FunSuite
 import com.scalaprog.engine.Server
+import com.scalaprog.eventstore.MemoryEventStore
 
 class RegisterMatchTest extends FunSuite {
 
    test("command test") {
+     Server.eventStore = MemoryEventStore
      Server.register(new LeagueHandler())
      Server.register(new ProfileHandler())
 

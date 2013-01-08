@@ -8,12 +8,13 @@ import java.lang.Exception
 import com.google.gson.Gson
 import java.util.UUID
 import com.scalaprog.engine.ProjectionEngine
+import com.codahale.jerkson.Json
 
 
 object MongoEventStore extends EventStore{
 
   val m = new Mongo()
-
+  val gson = new Gson()
 
   val db = m.getDB("eventStore")
   val coll = db.getCollection("events")
@@ -22,7 +23,7 @@ object MongoEventStore extends EventStore{
     val doc = new BasicDBObject()
     doc.put("id", id)
     doc.put("eventClass", event.getClass().getName())
-    doc.put("event", new Gson().toJson(event).toString())
+    doc.put("event", Json.generate(event))
     coll.insert(doc)
 
     ProjectionEngine.publishEvent(event)
@@ -35,7 +36,6 @@ object MongoEventStore extends EventStore{
       val coll = db.getCollection("events")
 
       val query = new BasicDBObject()
-      System.out.println("id:" + aggregateId)
       query.put("id", aggregateId)
 
       val cursor = coll.find(query)
@@ -45,10 +45,7 @@ object MongoEventStore extends EventStore{
           val next = cursor.next()
           val eventClassStr = next.get("eventClass").toString()
           val event = next.get("event").toString()
-
-          //val eventObj =  Json.fromJson(Json.parse(event), Class.forName(eventClassStr)).asInstanceOf[AbstractEvent]
-
-          val eventObj = new Gson().fromJson(event, Class.forName(eventClassStr)).asInstanceOf[AbstractEvent]
+          val eventObj = gson.fromJson(event, Class.forName(eventClassStr)).asInstanceOf[AbstractEvent]
           events = eventObj :: events
         }
       } finally {
@@ -77,9 +74,7 @@ object MongoEventStore extends EventStore{
           val eventClassStr = next.get("eventClass").toString()
           val event = next.get("event").toString()
 
-          //val eventObj =  Json.fromJson(Json.parse(event), Class.forName(eventClassStr)).asInstanceOf[AbstractEvent]
-
-          val eventObj = new Gson().fromJson(event, Class.forName(eventClassStr)).asInstanceOf[AbstractEvent]
+          val eventObj = gson.fromJson(event, Class.forName(eventClassStr)).asInstanceOf[AbstractEvent]
           events = eventObj :: events
         }
       } finally {

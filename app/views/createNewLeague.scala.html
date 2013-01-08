@@ -1,0 +1,23 @@
+@(form: Form[(String)])
+@import java.util.UUID
+@import helper._
+@import helpers.MyHelpers._
+
+
+
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>jQuery dialog2 plugin</title>
+        </head>
+        <body>
+            <h1>Thanks :-)</h1>
+            <p>
+                Thanks for clicking the previous link. May you tell me your name?
+            </p>
+            @helper.form(action = routes.Application.registerProfile, 'class -> "form-horizontal") {
+                <input type="text" name="leagueName">
+
+            }
+        </body>
+    </html>

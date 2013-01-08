@@ -8,7 +8,5 @@ import html.myTwitterBootstrapFieldConstructor
  * User: soren
  */
 object MyHelpers {
-
   implicit val myFields = FieldConstructor(myTwitterBootstrapFieldConstructor.f)
-
 }

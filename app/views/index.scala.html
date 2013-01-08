@@ -1,9 +1,10 @@
-@(message: String, scores: List[(String, Int)], users: List[(java.util.UUID, String)], userform: Form[models.User])
+@(message: String, scores: List[(String, Int)], users: List[(java.util.UUID, String)], leagues: List[(java.util.UUID, String)], userform: Form[models.User], scoreForm: Form[(List[String], List[String], Int, Int)])
+@import projection.LeagueProjection
 @import java.util.UUID
 @import helper._
 @import helpers.MyHelpers._
 
-@main("Welcome to Play 2.0") {
+@main("Welcome to RankyTank") {
     <div class="widget">
 
         <div class="widget-header">
@@ -12,20 +13,19 @@
         </div> <!-- /widget-header -->
 
         <div class="widget-content">
-
+         <table>
         @scores.map { score =>
             <tr>
                 <td>@score._1</td>
                 <td>@score._2</td>
             </tr>
         }
-
+            </table>
         </div> <!-- /widget-content -->
 
     </div>
 
 } {
-
     <div class="widget">
 
         <div class="widget-header">
@@ -34,12 +34,26 @@
         </div> <!-- /widget-header -->
 
         <div class="widget-content">
-            <form class="form-horizontal">
+        @helper.form(action = routes.Application.addNewMatch, 'class -> "form-horizontal") {
+
+            <div class="control-group">
+                <label class="control-label" for="league">League</label>
+                <div class="controls">
+
+                    <select placeholder="league" data-maxselected="1" data-placeholder="league" style="width:350px;" class="chzn-select" id="league" name="league" tabindex="8">
+                        <option value=""></option>
+                        @leagues.map { userData =>
+                            <option value=@userData._1>@userData._2</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
                 <div class="control-group">
-                    <label class="control-label" for="test_me_paddington">Team one</label>
+                    <label class="control-label" for="teamOne">Team one</label>
                     <div class="controls">
 
-                        <select placeholder="Email" data-maxselected="2" data-placeholder="Team one" style="width:350px;" multiple class="chzn-select" id="test_me_paddington" name="test_me_form" tabindex="8">
+                        <select placeholder="teamOne" data-maxselected="2" data-placeholder="Team one" style="width:350px;" multiple class="chzn-select" id="teamOne" name="teamOne" tabindex="8">
                             <option value=""></option>
                             @users.map { userData =>
                                 <option value=@userData._1>@userData._2</option>
@@ -48,9 +62,9 @@
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="test_me_paddington2">Team two</label>
+                    <label class="control-label" for="teamTwo">Team two</label>
                     <div class="controls">
-                        <select placeholder="Password" data-placeholder="Team two" style="width:350px;" multiple class="chzn-select" id="test_me_paddington2" name="test_me_form" tabindex="8">
+                        <select placeholder="teamTwo" data-maxselected="2" data-placeholder="Team two" style="width:350px;" multiple class="chzn-select" id="teamTwo" name="teamTwo" tabindex="8">
                             <option value=""></option>
                             @users.map { userData =>
                                 <option value=@userData._1>@userData._2</option>
@@ -58,12 +72,26 @@
                         </select>
                     </div>
                 </div>
-                <div class="control-group">
+
+                @inputText(
+                    scoreForm("scoreone"),
+                    '_label -> "Score team one",
+                    '_help -> "*",
+                    '_error -> userform.globalError
+                )
+                @inputText(
+                    scoreForm("scoretwo"),
+                    '_label -> "Score team two",
+                    '_help -> "*",
+                    '_error -> userform.globalError
+                )
+
+            <div class="control-group">
                     <div class="controls">
                         <button type="submit" class="btn">Post match</button>
                     </div>
                 </div>
-            </form>
+            }
 
         </div> <!-- /widget-content -->
 
@@ -99,7 +127,8 @@
                 userform("password"),
                 '_label -> "Password",
                 '_help -> "*",
-                '_error -> userform.globalError
+                '_error -> userform.globalError,
+                '_type -> "password"
             )
 
             <div class="control-group">

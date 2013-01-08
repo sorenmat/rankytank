@@ -7,7 +7,10 @@ import java.util.UUID
 import com.scalaprog.engine.Server
 import com.scalaprog.aggregate.AggregateRoot
 
-class ProfileAggregate(val id: UUID) extends AggregateRoot(id) {
+class ProfilesAggregate(val id: UUID) extends AggregateRoot(id) {
+
+  var userNames = List[String]()
+  var emails = List[String]()
 
   def this() {
     this(UUID.randomUUID())
@@ -18,6 +21,12 @@ class ProfileAggregate(val id: UUID) extends AggregateRoot(id) {
     require(cmd.password != null && cmd.password != "")
     require(cmd.email != null && cmd.email != "")
 
+    if (userNames.contains(cmd.name))
+      throw new RuntimeException("Username already taken")
+
+    if (emails.contains(cmd.email))
+      throw new RuntimeException("email already in use")
+
     val event = ProfileCreated(cmd.id, cmd.name, cmd.password, cmd.email)
     applyEvent(event, true)
   }
@@ -25,7 +34,8 @@ class ProfileAggregate(val id: UUID) extends AggregateRoot(id) {
   def applyEvent(cmd: AbstractEvent, storeEvent: Boolean) {
     cmd match {
       case c: ProfileCreated => {
-
+        userNames = c.name :: userNames
+        emails = c.email :: emails
       }
     }
     if (storeEvent)

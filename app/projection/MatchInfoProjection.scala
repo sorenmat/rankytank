@@ -10,9 +10,10 @@ import scala.collection.mutable.Map
 /**
  * User: soren
  */
-class MatchInfoProjection extends EventListener {
+object MatchInfoProjection extends EventListener {
   var scores = Map[UUID, Int]()
   var names = Map[UUID, String]()
+
 
   def eventPublished(event: AbstractEvent) {
     event match {
