@@ -39,8 +39,14 @@
             <div class="control-group">
                 <label class="control-label" for="league">League</label>
                 <div class="controls">
-
-                    <select placeholder="league" data-maxselected="1" data-placeholder="league" style="width:350px;" class="chzn-select" id="league" name="league" tabindex="8">
+            <script>
+            $(document).ready(function() { $("#league").select2({
+            maximumSelectionSize: 1,
+            minimumSelectionSize: 1
+        });
+});
+</script>
+                    <select placeholder="league" data-placeholder="league" style="width:350px;"  id="league" name="league" tabindex="8">
                         <option value=""></option>
                         @leagues.map { userData =>
                             <option value=@userData._1>@userData._2</option>
@@ -52,8 +58,15 @@
                 <div class="control-group">
                     <label class="control-label" for="teamOne">Team one</label>
                     <div class="controls">
+                        <script>
+                            $(document).ready(function() { $("#teamOne").select2({
+                                maximumSelectionSize: 2,
+                                minimumSelectionSize: 2
+                                });
+                         });
+                        </script>
 
-                        <select placeholder="teamOne" data-maxselected="2" data-placeholder="Team one" style="width:350px;" multiple class="chzn-select" id="teamOne" name="teamOne" tabindex="8">
+                        <select placeholder="teamOne" data-placeholder="Team one" style="width:350px;" multiple id="teamOne" name="teamOne" tabindex="8">
                             <option value=""></option>
                             @users.map { userData =>
                                 <option value=@userData._1>@userData._2</option>
@@ -64,7 +77,14 @@
                 <div class="control-group">
                     <label class="control-label" for="teamTwo">Team two</label>
                     <div class="controls">
-                        <select placeholder="teamTwo" data-maxselected="2" data-placeholder="Team two" style="width:350px;" multiple class="chzn-select" id="teamTwo" name="teamTwo" tabindex="8">
+                        <script>
+                            $(document).ready(function() { $("#teamTwo").select2({
+                            maximumSelectionSize: 2,
+                            minimumSelectionSize: 2
+                            });
+                            });
+                        </script>
+                        <select placeholder="teamTwo"   data-placeholder="Team two" style="width:350px;" multiple   id="teamTwo" name="teamTwo" tabindex="8">
                             <option value=""></option>
                             @users.map { userData =>
                                 <option value=@userData._1>@userData._2</option>

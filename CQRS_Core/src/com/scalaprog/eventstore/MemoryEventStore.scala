@@ -35,5 +35,9 @@ object MemoryEventStore extends EventStore {
     })
 
   }
+
+  def clear {
+    store = List[(UUID, String, AbstractEvent)]()
+  }
 }
 

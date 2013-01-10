@@ -6,7 +6,7 @@ import java.util.UUID
 import org.scalatest.FunSuite
 import com.scalaprog.engine.Server
 
-class JoinLeagueTest extends FunSuite {
+class JoinLeagueTest extends BasicEventTest {
 
   test("command test") {
     Server.register(new LeagueHandler())

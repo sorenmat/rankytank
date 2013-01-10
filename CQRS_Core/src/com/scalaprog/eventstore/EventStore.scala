@@ -14,6 +14,8 @@ trait EventStore {
 
   def getEventLog: List[AbstractEvent]
 
+  def clear
+
   case class StorageUnit(id: String, event: AbstractEvent)
 
 }

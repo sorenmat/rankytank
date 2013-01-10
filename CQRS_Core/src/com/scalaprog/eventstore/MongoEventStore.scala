@@ -5,15 +5,17 @@ import com.mongodb.{MongoURI, BasicDBObject, Mongo}
 import com.scalaprog.events.AbstractEvent
 import java.lang.Exception
 import com.google.gson.Gson
-import java.util.UUID
+import java.util.{Date, UUID}
 import com.scalaprog.engine.ProjectionEngine
 import com.codahale.jerkson.Json
 
 
+/**
+ * Mongo driver for the eventstore.
+ */
 object MongoEventStore extends EventStore {
 
 
-  //val mongoURI = new URI(System.getenv("MONGOHQ_URL"));
   val db = {
     val url = System.getenv("MONGOHQ_URL")
     if (url == null || url.isEmpty) {
@@ -25,12 +27,8 @@ object MongoEventStore extends EventStore {
 
   }
 
-
   val gson = new Gson()
 
-  //val db = mongoURI.connectDB()
-
-  //val db = m.getDB("eventStore")
   val coll = db.getCollection("events")
 
   def save(event: AbstractEvent, id: UUID) {
@@ -38,6 +36,7 @@ object MongoEventStore extends EventStore {
     doc.put("id", id)
     doc.put("eventClass", event.getClass().getName())
     doc.put("event", Json.generate(event))
+    doc.put("date", new Date())
     coll.insert(doc)
 
     ProjectionEngine.publishEvent(event)
@@ -96,6 +95,9 @@ object MongoEventStore extends EventStore {
       case e: Exception => e.printStackTrace()
     }
     return events
+  }
+
+  def clear{ // doesn't make sence in mongo
   }
 }
 

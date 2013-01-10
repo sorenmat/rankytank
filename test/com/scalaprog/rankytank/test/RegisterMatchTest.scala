@@ -7,10 +7,9 @@ import org.scalatest.FunSuite
 import com.scalaprog.engine.Server
 import com.scalaprog.eventstore.MemoryEventStore
 
-class RegisterMatchTest extends FunSuite {
+class RegisterMatchTest extends BasicEventTest {
 
    test("command test") {
-     Server.eventStore = MemoryEventStore
      Server.register(new LeagueHandler())
      Server.register(new ProfileHandler())
 

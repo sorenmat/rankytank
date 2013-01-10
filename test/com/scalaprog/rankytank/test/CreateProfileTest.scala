@@ -2,11 +2,12 @@ package com.scalaprog.rankytank.test
 
 import aggregates.ProfilesAggregate
 import com.scalaprog.engine.Server
+import com.scalaprog.eventstore._
 import commands.CreateUserProfile
 import java.util.UUID
-import org.scalatest.FunSuite
 
-class CreateProfileTest extends FunSuite {
+class CreateProfileTest extends BasicEventTest {
+
 
   test("command test") {
     val agg = new ProfilesAggregate()
