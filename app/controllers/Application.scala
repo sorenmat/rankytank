@@ -10,7 +10,7 @@ import play.api.data.Forms._
 import java.util.UUID
 
 
-object Application extends Controller {
+object Application extends Controller with Secured   {
 
 
   val registerNewMatchForm = Form(
@@ -23,9 +23,9 @@ object Application extends Controller {
   )
 
 
-  def index = Action {
+  def index = IsAuthenticated { _ => implicit request =>
     // Ok("index")
-    println("index called")
+    println("index called by "+session.get("user"))
 
 
     println(MatchInfoProjection.getScores.toList)
@@ -39,7 +39,7 @@ object Application extends Controller {
 
 
 
-  def addNewMatch = Action { implicit request =>
+  def addNewMatch = IsAuthenticated { _ => implicit request =>
     var newData = Map[String, String]()
     val urlFormEncoded = request.body.asFormUrlEncoded.getOrElse(Map())
 
@@ -68,7 +68,7 @@ object Application extends Controller {
   }
 
 
-  def createNewLeague = Action {
+  def createNewLeague = IsAuthenticated { _ => implicit request =>
     Ok(views.html.createNewLeague(null))
   }
 

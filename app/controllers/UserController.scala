@@ -14,9 +14,11 @@ object UserController extends Controller {
 
   val loginForm = Form(
     tuple(
-      "username" -> nonEmptyText.verifying("User not found", name => ProfileProjection.names.contains(name)),
+      "username" -> nonEmptyText,
       "password" -> nonEmptyText
-    )
+    ) verifying ("Invalid email or password", result => result match {
+      case (username, password) => ProfileProjection.names.contains(username)
+    })
   )
 
   val profileForm = Form(
@@ -48,8 +50,7 @@ object UserController extends Controller {
         if(!ProfileProjection.names.contains(value._1))
           BadRequest(views.html.login(loginForm))
         //Server.execute(CreateUserProfile(UUID.randomUUID(), value.profileName, value.password, value.email))
-        session + ("user", value._1)
-        Redirect(routes.Application.index())
+        Redirect(routes.Application.index()).withSession("user" -> value._1)
         //Ok(views.html.index("", MatchInfoProjection.getScores.toList, ProfileProjection.namesAndUUIDS.map(d => (d._1, d._2)).toList, LeagueProjection.leagues.toList,  null)
       }
     )
