@@ -1,4 +1,4 @@
-@(message: String, scores: List[(String, Int)], users: List[(java.util.UUID, String)], leagues: List[(java.util.UUID, String)], userform: Form[models.User], scoreForm: Form[(List[String], List[String], Int, Int)])
+@(message: String, scores: List[(String, Int)], users: List[(java.util.UUID, String)], leagues: List[(java.util.UUID, String)],  scoreForm: Form[(List[String], List[String], Int, Int)])
 @import projection.LeagueProjection
 @import java.util.UUID
 @import helper._
@@ -97,13 +97,13 @@
                     scoreForm("scoreone"),
                     '_label -> "Score team one",
                     '_help -> "*",
-                    '_error -> userform.globalError
+                    '_error -> scoreForm.globalError
                 )
                 @inputText(
                     scoreForm("scoretwo"),
                     '_label -> "Score team two",
                     '_help -> "*",
-                    '_error -> userform.globalError
+                    '_error -> scoreForm.globalError
                 )
 
             <div class="control-group">
@@ -120,43 +120,4 @@
 
 } {
 
-    <div class="widget">
-        <div class="widget-header">
-            <i class="icon-star"></i>
-            <h3>Register profile</h3>
-        </div> <!-- /widget-header -->
-
-        <div class="widget-content">
-        @helper.form(action = routes.Application.registerProfile, 'class -> "form-horizontal") {
-
-            @inputText(
-                userform("profileName"),
-                '_label -> "Name",
-                '_help -> "*",
-                '_error -> userform.globalError
-            )
-
-            @inputText(
-                userform("email"),
-                '_label -> "Email",
-                '_help -> "*",
-                '_error -> userform.globalError
-            )
-
-            @inputPassword(
-                userform("password"),
-                '_label -> "Password",
-                '_help -> "*",
-                '_error -> userform.globalError,
-                '_type -> "password"
-            )
-
-            <div class="control-group">
-                <div class="controls">
-                    <button type="submit" class="btn">Register profile</button>
-                </div>
-            </div>
-        }
-        </div>
-    </div>
 }

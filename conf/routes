@@ -3,11 +3,13 @@
 # ~~~~
 
 # Home page
-GET     /                                       controllers.Application.index
-POST    /                                       controllers.Application.registerProfile
+GET     /                                      controllers.Application.index
+
 POST    /addNewMatch                            controllers.Application.addNewMatch
 
-
+GET     /login                                 controllers.UserController.login
+POST    /registerProfile                       controllers.UserController.registerProfile
+GET     /registerProfile                       controllers.UserController.registerProfile
 
 ## POPUPS using jquery dialog2
 GET     /createNewLeague                        controllers.Application.createNewLeague
