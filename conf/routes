@@ -3,11 +3,11 @@
 # ~~~~
 
 # Home page
-GET     /                                      controllers.Application.index
+GET     /overview                                      controllers.Application.index
 
 POST    /addNewMatch                            controllers.Application.addNewMatch
 
-GET     /login                                 controllers.UserController.login
+GET     /                                controllers.UserController.login
 POST    /registerProfile                       controllers.UserController.registerProfile
 GET     /registerProfile                       controllers.UserController.registerProfile
 

@@ -6,7 +6,7 @@ import aggregates._
 import java.util.UUID
 
 /**
- * CommandHandler for handling commands related to User profiles
+ * CommandHandler for handling writeside.commands related to User profiles
  * User: soren
  */
 class ProfileHandler extends CommandHandler {

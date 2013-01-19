@@ -1,7 +1,7 @@
 package controllers
 
 import play.api.mvc._
-import projection.{LeagueProjection, ProfileProjection, MatchInfoProjection}
+import readside.projection.{LeagueProjection, ProfileProjection, MatchInfoProjection}
 import com.scalaprog.engine.Server
 import commands.{RegisterMatchScore, CreateUserProfile}
 import models._

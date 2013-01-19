@@ -29,10 +29,19 @@
                 <div class="widget-content">
                     @helper.form(action = routes.UserController.login, 'class -> "form-horizontal") {
                     @inputText(loginForm("username"),
-                    '_label -> "Username"
+                    '_label -> "Username",
+                    '_name -> "username",
+                    '_id -> "username",
+                    '_help -> "*",
+                    '_error -> loginForm.globalError
                     )
                     @inputText(loginForm("password"),
-                    '_label -> "Password"
+                    '_label -> "Password",
+                    '_name -> "password",
+                    '_id -> "password",
+                    '_help -> "*",
+                    '_error -> loginForm.error("password")
+
                     )
                     <button class="btn btn-primary" type="submit">Sign in</button>
                     <a href=@routes.UserController.registerProfile class="btn btn-primary">Create profile</a>

@@ -1,4 +1,4 @@
-package projection
+package readside.projection
 
 import com.scalaprog.projections.engine.EventListener
 import com.scalaprog.events.AbstractEvent

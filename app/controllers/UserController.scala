@@ -2,7 +2,7 @@ package controllers
 
 
 import play.api.mvc._
-import projection.ProfileProjection
+import readside.projection.ProfileProjection
 import com.scalaprog.engine.Server
 import commands.CreateUserProfile
 import models._
@@ -14,7 +14,7 @@ object UserController extends Controller {
 
   val loginForm = Form(
     tuple(
-      "username" -> nonEmptyText,
+      "username" -> nonEmptyText.verifying("User not found", name => ProfileProjection.names.contains(name)),
       "password" -> nonEmptyText
     )
   )
@@ -42,12 +42,13 @@ object UserController extends Controller {
         println("-----------------")
         println(formWithErrors)
         println("-----------------")
-        BadRequest(views.html.login(loginForm))
+        BadRequest(views.html.login(formWithErrors))
       },
       value => {// binding success, you get the actual value
         if(!ProfileProjection.names.contains(value._1))
           BadRequest(views.html.login(loginForm))
         //Server.execute(CreateUserProfile(UUID.randomUUID(), value.profileName, value.password, value.email))
+        session + ("user", value._1)
         Redirect(routes.Application.index())
         //Ok(views.html.index("", MatchInfoProjection.getScores.toList, ProfileProjection.namesAndUUIDS.map(d => (d._1, d._2)).toList, LeagueProjection.leagues.toList,  null)
       }

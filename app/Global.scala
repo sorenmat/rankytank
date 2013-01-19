@@ -3,7 +3,7 @@ import commandhandlers.{LeagueHandler, ProfileHandler}
 import commands.CreateLeague
 import java.util.UUID
 import play.api._
-import projection.{ProfileProjection, MatchInfoProjection, LeagueProjection}
+import readside.projection.{ProfileProjection, MatchInfoProjection, LeagueProjection}
 
 object Global extends GlobalSettings {
 
