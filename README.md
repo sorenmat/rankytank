@@ -8,4 +8,4 @@ play run
 
 Travis build status
 
-[![Build Status](https://travis-ci.org/travis-ci/travis-build.png?branch=extract-logging)](rankytank)
+[![Build Status](https://travis-ci.org/travis-ci/travis-build.png?branch=master)](rankytank)
