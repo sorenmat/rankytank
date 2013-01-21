@@ -40,7 +40,6 @@ object Application extends Controller with Secured   {
 
 
   def addNewMatch = IsAuthenticated { _ => implicit request =>
-    var newData = Map[String, String]()
     val urlFormEncoded = request.body.asFormUrlEncoded.getOrElse(Map())
 
     registerNewMatchForm.bindFromRequest.fold(
