@@ -9,6 +9,7 @@ import java.util.UUID
 trait EventStore {
 
   def save(event: AbstractEvent, id: UUID)
+  def save(event: List[AbstractEvent], id: UUID)
 
   def getEvents(aggregateId: UUID): List[AbstractEvent]
 

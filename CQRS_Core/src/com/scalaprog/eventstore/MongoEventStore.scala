@@ -99,5 +99,10 @@ object MongoEventStore extends EventStore {
 
   def clear{ // doesn't make sence in mongo
   }
+
+  def save(events: List[AbstractEvent], id: UUID) {
+    for(event <- events)
+      save(event, id)
+  }
 }
 

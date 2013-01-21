@@ -5,9 +5,9 @@ import commands.{RegisterMatchScore, JoinLeague, CreateLeague}
 import events.{MatchScoreRegistered, LeagueJoined, LeagueCreated}
 import java.util.UUID
 import com.scalaprog.engine.Server
-import com.scalaprog.aggregate.AggregateRoot
+import com.scalaprog.domain.AggregateRoot
 
-class LeagueAggregate(val id: UUID) extends AggregateRoot(id) {
+class LeagueAggregate(id: UUID) extends AggregateRoot(id) {
 
   var created = false
 

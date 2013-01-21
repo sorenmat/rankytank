@@ -39,5 +39,10 @@ object MemoryEventStore extends EventStore {
   def clear {
     store = List[(UUID, String, AbstractEvent)]()
   }
+
+  def save(events: List[AbstractEvent], id: UUID) {
+    for(event <- events)
+      save(event, id)
+  }
 }
 

@@ -5,9 +5,9 @@ import commands.CreateUserProfile
 import events.ProfileCreated
 import java.util.UUID
 import com.scalaprog.engine.Server
-import com.scalaprog.aggregate.AggregateRoot
+import com.scalaprog.domain.AggregateRoot
 
-class ProfilesAggregate(val id: UUID) extends AggregateRoot(id) {
+class ProfilesAggregate(id: UUID) extends AggregateRoot(id) {
 
   var userNames = List[String]()
   var emails = List[String]()

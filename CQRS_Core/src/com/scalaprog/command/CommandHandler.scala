@@ -2,7 +2,7 @@ package com.scalaprog.command
 
 import java.util.UUID
 import com.scalaprog.engine.Server
-import com.scalaprog.aggregate.AggregateRoot
+import com.scalaprog.domain.AggregateRoot
 
 /**
  * User: soren
