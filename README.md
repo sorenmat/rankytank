@@ -1,9 +1,11 @@
-This is your new Play 2.0 application
-=====================================
+Reference implemtation of CQRS+ES in Scala
+==========================================
 
-This file will be packaged with your application, when using `play dist`.
+* Start the application
 
-This file was modified by IntelliJ IDEA 12.0.1 for binding GitHub repository
+play run
+
 
 Travis build status
+
 [![Build Status](https://travis-ci.org/travis-ci/travis-build.png?branch=extract-logging)](rankytank)
