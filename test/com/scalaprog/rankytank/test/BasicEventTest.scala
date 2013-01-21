@@ -12,7 +12,10 @@ class BasicEventTest extends FunSuite with BeforeAndAfter {
   Server.eventStore = MemoryEventStore
 
   before {
+    println("*********** RUNNING BEFORE **********************")
     Server.eventStore.clear
+    Server.handlers = Nil
+    println("Size of eventlog: "+Server.eventStore.getEventLog)
   }
 
 }

@@ -23,7 +23,8 @@ object ApplicationBuild extends Build {
     // Add your own project settings here
     //sourceDirectory in Compile <<= baseDirectory / "CQRS_Core/src",
     scalaSource in Compile <<= baseDirectory / "CQRS_Core/src",
-    resolvers += "webjars" at "http://webjars.github.com/m2"
+    resolvers += "webjars" at "http://webjars.github.com/m2",
+    testOptions in Test := Nil
 
   )
 

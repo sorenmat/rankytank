@@ -8,7 +8,7 @@ import com.scalaprog.engine.Server
 abstract class AggregateRoot(id: UUID) {
 
 	def applyEvent(cmd: AbstractEvent , storeEvent: Boolean)
-	
+	                /*
 	def loadFromHistory() = {
     val events = Server.eventStore.getEvents(id).reverse
     println("-----------------------------")
@@ -18,4 +18,5 @@ abstract class AggregateRoot(id: UUID) {
 		}
     this
 	}
+	*/
 }

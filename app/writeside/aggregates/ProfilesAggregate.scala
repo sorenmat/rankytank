@@ -22,7 +22,7 @@ class ProfilesAggregate(val id: UUID) extends AggregateRoot(id) {
     require(cmd.email != null && cmd.email != "")
 
     if (userNames.contains(cmd.name))
-      throw new RuntimeException("Username already taken")
+      throw new RuntimeException("Username '"+cmd.name+"' already taken")
 
     if (emails.contains(cmd.email))
       throw new RuntimeException("email already in use")

@@ -13,8 +13,9 @@ trait CommandHandler {
 
   def getAggreateById[T <: AggregateRoot](id: UUID, c: Class[T]) = {
     val obj = c.getConstructor(classOf[UUID]).newInstance(id)
-    for(event <- Server.eventStore.getEvents(id))
+    for(event <- Server.eventStore.getEvents(id)) {
       obj.applyEvent(event, false)
+    }
     obj
   }
 }

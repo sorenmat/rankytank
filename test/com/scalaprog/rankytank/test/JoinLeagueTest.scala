@@ -13,7 +13,7 @@ class JoinLeagueTest extends BasicEventTest {
     Server.register(new ProfileHandler())
 
     val userId: UUID = UUID.randomUUID()
-    Server.execute(new CreateUserProfile(userId, "Soren", "1234", "soren@test.com"))
+    Server.execute(new CreateUserProfile(userId, "Soren"+userId.toString, "1234", "soren@test.com"))
 
     val leagueName: String = "Test League"
     val leagueId = UUID.randomUUID()
@@ -22,7 +22,7 @@ class JoinLeagueTest extends BasicEventTest {
     //leagueAgg.createLeague(createLeagueCmd)
 
     // Asserts
-    assert(Server.eventStore.getEvents(userId).size === 1)
+    assert(Server.eventStore.getEvents(UUID.fromString("da1b24e5-294b-4919-b733-1d31af371951")).size === 1) // hardcoded Profile aggregate id, fix this..
     assert(Server.eventStore.getEvents(leagueId).size === 1)
 
 
@@ -32,7 +32,7 @@ class JoinLeagueTest extends BasicEventTest {
       Server.execute(JoinLeague(leagueId, userId))
       fail("Should give a error saying that a user can only be added once")
     } catch {
-      case e: RuntimeException => // ignore expected error
+      case e: java.lang.RuntimeException => println("this should happen.........................")// ignore expected error
       case _ => fail("Should give a error saying that a user can only be added once")
     }
 

@@ -6,8 +6,9 @@ import java.util.UUID
 import org.scalatest.FunSuite
 import com.scalaprog.engine.{ProjectionEngine, Server}
 import readside.projection.MatchInfoProjection
+import com.scalaprog.rankytank.test.BasicEventTest
 
-class MatchInfoProjectionTest extends FunSuite {
+class MatchInfoProjectionTest extends BasicEventTest {
 
   test("command test") {
     Server.register(new LeagueHandler())
