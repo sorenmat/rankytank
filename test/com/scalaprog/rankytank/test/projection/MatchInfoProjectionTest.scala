@@ -5,7 +5,7 @@ import commands.{RegisterMatchScore, JoinLeague, CreateLeague, CreateUserProfile
 import java.util.UUID
 import org.scalatest.FunSuite
 import com.scalaprog.engine.{ProjectionEngine, Server}
-import projection.MatchInfoProjection
+import readside.projection.MatchInfoProjection
 
 class MatchInfoProjectionTest extends FunSuite {
 
