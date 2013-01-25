@@ -4,12 +4,13 @@ import com.scalaprog.command.{AbstractCommand, CommandHandler}
 import commands._
 import aggregates._
 import java.util.UUID
+import com.scalaprog.domain.IRepository
 
 /**
  * CommandHandler for handling writeside.commands related to User profiles
  * User: soren
  */
-class ProfileHandler extends CommandHandler {
+class ProfileHandler(repo: IRepository[ProfilesAggregate]) extends CommandHandler(repo) {
   def handle(cmd: AbstractCommand) {
     cmd match {
       case c: CreateUserProfile => {

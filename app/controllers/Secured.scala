@@ -19,7 +19,7 @@ trait Secured {
   /**
    * Redirect to login if the user in not authorized.
    */
-  private def onUnauthorized(request: RequestHeader) = Results.Redirect(routes.UserController.login)
+  private def onUnauthorized(request: RequestHeader) = Results.Redirect(routes.UserController.showlogin)
 
   // --
 

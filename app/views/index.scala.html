@@ -1,4 +1,5 @@
 @(message: String, scores: List[(String, Int)], users: List[(java.util.UUID, String)], leagues: List[(java.util.UUID, String)],  scoreForm: Form[(List[String], List[String], Int, Int)])
+@import readside.projection.MatchInfoProjection
 @import readside.projection.LeagueProjection
 @import java.util.UUID
 @import helper._
@@ -6,12 +7,9 @@
 @import tags._
 
 @main("Welcome to RankyTank") {
-           @leaderboard(scores)
-
+    @leaderboard(scores)
 } {
-   @enterscore(users, leagues, scoreForm)
-
-
+    @enterscore(users, leagues, scoreForm)
 } {
-
+    @last10matches()
 }

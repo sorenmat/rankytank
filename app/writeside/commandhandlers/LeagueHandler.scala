@@ -3,11 +3,13 @@ package commandhandlers
 import com.scalaprog.command.{AbstractCommand, CommandHandler}
 import commands.{RegisterMatchScore, JoinLeague, CreateLeague}
 import aggregates.LeagueAggregate
+import com.scalaprog.domain.IRepository
 
 /**
  * User: soren
  */
-class LeagueHandler extends CommandHandler {
+class LeagueHandler(repo: IRepository[LeagueAggregate]) extends CommandHandler(repo) {
+
   def handle(cmd: AbstractCommand) {
     cmd match {
       case c: CreateLeague => {

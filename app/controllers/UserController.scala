@@ -30,30 +30,23 @@ object UserController extends Controller {
   )
 
   def isUserNameUnique(name: String) : Boolean = {
-    println("profile projections name")
-    println(ProfileProjection.names.mkString("\n"))
-    println("unique name "+(!ProfileProjection.names.contains(name)))
     !ProfileProjection.names.contains(name.trim)
   }
 
-  def login = Action { implicit request =>
-    println("registred profile called")
+  def showlogin = Action { implicit request =>
+        Ok(views.html.login(loginForm))
+  }
+    def tryToLogin = Action { implicit request =>
+      println("registred profile called")
 
-    loginForm.bindFromRequest.fold(
-      formWithErrors => {// binding failure, you retrieve the form containing errors,
-        println("-----------------")
-        println(formWithErrors)
-        println("-----------------")
-        BadRequest(views.html.login(formWithErrors))
-      },
-      value => {// binding success, you get the actual value
-        if(!ProfileProjection.names.contains(value._1))
-          BadRequest(views.html.login(loginForm))
-        //Server.execute(CreateUserProfile(UUID.randomUUID(), value.profileName, value.password, value.email))
-        Redirect(routes.Application.index()).withSession("user" -> value._1)
-        //Ok(views.html.index("", MatchInfoProjection.getScores.toList, ProfileProjection.namesAndUUIDS.map(d => (d._1, d._2)).toList, LeagueProjection.leagues.toList,  null)
-      }
-    )
+      loginForm.bindFromRequest.fold(
+        formWithErrors => {// binding failure, you retrieve the form containing errors,
+          BadRequest(views.html.login(formWithErrors))
+        },
+        value => {// binding success, you get the actual value
+          Redirect(routes.Application.index()).withSession("user" -> value._1)
+        }
+      )
   }
 
 
@@ -70,7 +63,7 @@ object UserController extends Controller {
       value => {// binding success, you get the actual value
         println("saving user")
         Server.execute(CreateUserProfile(UUID.randomUUID(), value.profileName, value.password, value.email))
-        Redirect(routes.UserController.login())
+        Redirect(routes.UserController.showlogin())
         //Ok(views.html.index())
       }
     )

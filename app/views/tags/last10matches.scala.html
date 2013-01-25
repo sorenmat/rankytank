@@ -1,0 +1,26 @@
+@import readside.projection.MatchInfoProjection
+@import readside.projection.MatchScore
+<div class="widget">
+
+<div class="widget-header">
+    <i class="icon-list"></i>
+    <h3>Last 10 matches</h3>
+</div> <!-- /widget-header -->
+
+<div class="widget-content">
+    <table>
+    @MatchInfoProjection.getLast10MatchScores.map { score =>
+        <tr>
+            <td width="180"><h3>@score.user1</h3></td>
+            <td style="text-align: right"><h3>@score.user2</h3></td>
+            <td width="180" style="text-align: center"><h3>vs</h3></td>
+            <td width="180"><h3>@score.user3</h3></td>
+            <td style="text-align: right"><h3>@score.user4</h3></td>
+
+            <td width="180" style="text-align: right"><h3>@score.teamOneScore-@score.teamTwoScore</h3></td>
+        </tr>
+    }
+    </table>
+</div> <!-- /widget-content -->
+
+</div>

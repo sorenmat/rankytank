@@ -27,7 +27,7 @@
                 </div> <!-- /widget-header -->
 
                 <div class="widget-content">
-                    @helper.form(action = routes.UserController.login, 'class -> "form-horizontal") {
+                    @helper.form(action = routes.UserController.tryToLogin(), 'class -> "form-horizontal") {
                     @inputText(loginForm("username"),
                     '_label -> "Username",
                     '_name -> "username",

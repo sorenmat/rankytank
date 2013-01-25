@@ -23,30 +23,19 @@ object Application extends Controller with Secured   {
   )
 
 
+  /**
+   * The index page
+   * @return
+   */
   def index = IsAuthenticated { _ => implicit request =>
-    // Ok("index")
-    println("index called by "+session.get("user"))
-
-
-    println(MatchInfoProjection.getScores.toList)
-    println("-------------------")
-    println(ProfileProjection.namesAndUUIDS.map(d => (d._1, d._2)).toList)
-    println("leagues...")
-    println(LeagueProjection.leagues.map(l => (l._1.toString, l._2)).toSeq)
     Ok(views.html.index("", MatchInfoProjection.getScores.toList, ProfileProjection.namesAndUUIDS.map(d => (d._1, d._2)).toList, LeagueProjection.leagues.toList, registerNewMatchForm))
-    //Ok(views.html.index("Your new application is ready.", null)  )
   }
-
-
 
   def addNewMatch = IsAuthenticated { _ => implicit request =>
     val urlFormEncoded = request.body.asFormUrlEncoded.getOrElse(Map())
 
     registerNewMatchForm.bindFromRequest.fold(
       formWithErrors => {// binding failure, you retrieve the form containing errors,
-        println("-------SCORE FORM ----------")
-        println(formWithErrors)
-        println("-----------------")
         BadRequest(views.html.index("", MatchInfoProjection.getScores.toList, ProfileProjection.namesAndUUIDS.map(d => (d._1, d._2)).toList, LeagueProjection.leagues.toList,  formWithErrors))
       },
       value => {// binding success, you get the actual value
@@ -56,9 +45,6 @@ object Application extends Controller with Secured   {
         val teamTwo = (UUID.fromString(urlFormEncoded("teamTwo")(0)), UUID.fromString(urlFormEncoded("teamTwo")(1)) )
         val scoreOne = urlFormEncoded("scoreone")(0).toInt
         val scoreTwo = urlFormEncoded("scoretwo")(0).toInt
-        println("TeamOne "+teamOne+": "+scoreOne)
-        println("TeamTwo "+teamTwo+": "+scoreTwo)
-
 
         Server.execute(RegisterMatchScore(league, teamOne, teamTwo, scoreOne, scoreTwo))
         Ok(views.html.index("", MatchInfoProjection.getScores.toList, ProfileProjection.namesAndUUIDS.map(d => (d._1, d._2)).toList,LeagueProjection.leagues.toList,  registerNewMatchForm))
