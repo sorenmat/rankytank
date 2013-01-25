@@ -7,6 +7,7 @@ import com.scalaprog.eventstore.EventStore
  * User: soren
  */
 class Repository[T <: AggregateRoot](eventStore: EventStore) extends IRepository[T] {
+
   def save(aggregate: AggregateRoot, expectedVersion: Int) {
     eventStore.save(aggregate.unCommitedEvent, aggregate.id)
   }

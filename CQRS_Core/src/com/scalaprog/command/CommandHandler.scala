@@ -2,12 +2,12 @@ package com.scalaprog.command
 
 import java.util.UUID
 import com.scalaprog.engine.Server
-import com.scalaprog.domain.AggregateRoot
+import com.scalaprog.domain.{IRepository, AggregateRoot}
 
 /**
  * User: soren
  */
-trait CommandHandler {
+abstract class CommandHandler[A <: AggregateRoot](repository: IRepository[A]) {
 
   def handle(cmd: AbstractCommand)
 
