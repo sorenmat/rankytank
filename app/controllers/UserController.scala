@@ -16,7 +16,7 @@ object UserController extends Controller {
     tuple(
       "username" -> nonEmptyText,
       "password" -> nonEmptyText
-    ) verifying ("Invalid email or password", result => result match {
+    ) verifying ("Invalid username or password", result => result match {
       case (username, password) => ProfileProjection.names.contains(username)
     })
   )
