@@ -1,0 +1,94 @@
+@(users: List[(java.util.UUID, String)], leagues: List[(java.util.UUID, String)],  scoreForm: Form[(List[String], List[String], Int, Int)])
+@import helper._
+@import helpers.MyHelpers._
+
+<div class="widget">
+
+<div class="widget-header">
+<i class="icon-edit"></i>
+<h3>Enter match score</h3>
+</div> <!-- /widget-header -->
+
+<div class="widget-content">
+@helper.form(action = routes.Application.addNewMatch, 'class -> "form-horizontal") {
+
+    <div class="control-group">
+    <label class="control-label" for="league">League</label>
+    <div class="controls">
+    <script>
+    $(document).ready(function() { $("#league").select2({
+    maximumSelectionSize: 1,
+    minimumSelectionSize: 1
+});
+    });
+</script>
+<select placeholder="league" data-placeholder="league" style="width:350px;"  id="league" name="league" tabindex="8">
+<option value=""></option>
+@leagues.map { userData =>
+    <option value=@userData._1>@userData._2</option>
+}
+</select>
+</div>
+            </div>
+
+<div class="control-group">
+<label class="control-label" for="teamOne">Team one</label>
+<div class="controls">
+    <script>
+        $(document).ready(function() { $("#teamOne").select2({
+        maximumSelectionSize: 2,
+        minimumSelectionSize: 2
+        });
+        });
+    </script>
+
+    <select placeholder="teamOne" data-placeholder="Team one" style="width:350px;" multiple id="teamOne" name="teamOne" tabindex="8">
+        <option value=""></option>
+        @users.map { userData =>
+            <option value=@userData._1>@userData._2</option>
+        }
+    </select>
+</div>
+</div>
+<div class="control-group">
+<label class="control-label" for="teamTwo">Team two</label>
+<div class="controls">
+    <script>
+        $(document).ready(function() { $("#teamTwo").select2({
+        maximumSelectionSize: 2,
+        minimumSelectionSize: 2
+        });
+        });
+    </script>
+    <select placeholder="teamTwo"   data-placeholder="Team two" style="width:350px;" multiple   id="teamTwo" name="teamTwo" tabindex="8">
+        <option value=""></option>
+        @users.map { userData =>
+            <option value=@userData._1>@userData._2</option>
+        }
+    </select>
+</div>
+</div>
+
+@inputText(
+    scoreForm("scoreone"),
+    '_label -> "Score team one",
+    '_help -> "*",
+    '_error -> scoreForm.globalError
+)
+@inputText(
+    scoreForm("scoretwo"),
+    '_label -> "Score team two",
+    '_help -> "*",
+    '_error -> scoreForm.globalError
+)
+
+<div class="control-group">
+<div class="controls">
+    <button type="submit" class="btn">Post match</button>
+</div>
+</div>
+    }
+
+</div> <!-- /widget-content -->
+
+</div>

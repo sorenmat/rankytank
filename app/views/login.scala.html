@@ -41,22 +41,17 @@
                     '_id -> "password",
                     '_help -> "*",
                     '_type -> "password",
-                    '_error -> loginForm.error("password")
+                    '_error -> loginForm.globalError
 
                     )
                     <button class="btn btn-primary" type="submit">Sign in</button>
                     <a href=@routes.UserController.registerProfile class="btn btn-primary">Create profile</a>
                     }
                 </div> <!-- /widget-content -->
-
             </div>
-
-
         </div>
         <div class="span4">
         </div>
       </div>
-
-
 </body>
 </html>
